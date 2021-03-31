@@ -1,0 +1,55 @@
+<div style="min-width: 100%; margin-bottom: 1rem;">
+  <div class="row">
+    <div class="col-lg-8">
+      <div echarts [options]="chartOption" class="chart" style="color: white;"></div>
+
+    </div>
+    <div class="col-lg-4">
+      <div echarts [options]="lineOption" class="chart"  style="background-color: wheat;"></div>
+    </div>
+  </div>
+</div>
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+  <div nz-row [nzGutter]="26" class="form-group">
+    <div nz-col [nzSpan]="26">
+      <nz-form-item nzFlex style="background: #fdc712;">
+        <nz-form-label [nzSpan]="4">Rechercher</nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <input nz-input placeholder="Mot clé" formControlName="name" >
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>
+<div class="search-result-list" style="overflow-x: auto;">
+  <div class="table-responsive">
+      <table class="table" style="font-size: 0.8em;">
+        <thead>
+          <tr style="background: white;">
+            <th *ngFor="let col of columns; let i = index;" style="text-align: center;">{{ col.title }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of dataSet  | paginate: { itemsPerPage: 10, currentPage: p };" style="color: white;text-align: center;" class="hvr-pop">
+            <td>{{data.partenaire}}</td>
+            <td>{{data.telephone}}</td>
+            <td>{{data.type}}</td>
+            <td>{{data.duree}}</td>
+            <td>{{data.commition}}</td>
+            <td [ngClass]="{bg:true,'bg-danger':data.etat==1,'bg-warning':data.etat==2,'bg-success':data.etat==3}">{{data.etat}}</td>
+            <td>{{data.created_at}}</td>
+            <td>{{data.updated_at}}</td>
+            <td>
+              <button   nz-button nzType="primary"  (click)="showModal(data)"  style="margin-bottom: 1rem;"><span>Imprimer</span></button>
+              <nz-divider nzType="vertical"></nz-divider>
+              <button nz-button (click)="resetForm()">Voir plus</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <div class="list">
+      <pagination-controls (pageChange)="p = $event" previousLabel="Précédent" nextLabel="Suivant"></pagination-controls>  
+    </div>
+  </div>
+  
+</div>
