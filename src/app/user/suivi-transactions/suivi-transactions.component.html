@@ -1,7 +1,7 @@
 <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
   <div nz-row [nzGutter]="26" class="form-group">
     <div nz-col [nzSpan]="26">
-      <nz-form-item nzFlex style="background: #fdc712;">
+      <nz-form-item nzFlex style="background: #fff;">
         <nz-form-label [nzSpan]="4">Rechercher</nz-form-label>
         <nz-form-control [nzSpan]="20">
           <input nz-input placeholder="Mot clé" formControlName="name" >
@@ -20,19 +20,14 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of dataSet  | paginate: { itemsPerPage: 10, currentPage: p };" style="color: white;text-align: center;" class="hvr-pop">
-            <td>{{data.partenaire}}</td>
-            <td>{{data.telephone}}</td>
-            <td>{{data.type}}</td>
-            <td>{{data.duree}}</td>
-            <td>{{data.commition}}</td>
-            <td [ngClass]="{bg:true,'bg-danger':data.etat==1,'bg-warning':data.etat==2,'bg-success':data.etat==3}">{{data.etat}}</td>
-            <td>{{data.created_at}}</td>
-            <td>{{data.updated_at}}</td>
-            <td>
-              <button   nz-button nzType="primary"  (click)="showModal(data)"  style="margin-bottom: 1rem;"><span>Imprimer</span></button>
-              <nz-divider nzType="vertical"></nz-divider>
-              <button nz-button (click)="resetForm()">Voir plus</button>
-            </td>
+            <td>{{data.produit}}</td>
+            <td>{{data.quantite}}</td>
+            <td>{{data.prix}}</td>
+            <td>{{data.type_seller}}</td>
+            <td>{{data.nom_buyer}}</td>
+            <td>{{data.tel_seller}}</td>
+            <td>{{data.tel_buyer}}</td>
+            <td [ngClass]="{bg:true,'bg-danger':data.etat==0,'bg-warning':data.etat==1,'bg-success':data.etat==2}">{{data.etat}}</td>
           </tr>
         </tbody>
     </table>

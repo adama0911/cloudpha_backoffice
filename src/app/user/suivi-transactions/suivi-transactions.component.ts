@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd';
+import { TransactionsService } from 'src/app/service/transactions.service';
 
 @Component({
   selector: 'app-suivi-transactions.component',
@@ -16,74 +17,81 @@ export class SuiviTransactionsComponent implements OnInit {
 
   public dataSet: Array<object> = [
     {
-      partenaire:"Black Company",
-      client:"Client Black",
-      telephone:'18345063932',
-      duree:'2 mois',
-      type:"Voitre",
-      commition:400,
-      etat:1,
-      created_at:"02/09/2021",
-      updated_at: "02/09/2021"
-    },
-    {
-      partenaire:"Green Company",
-      telephone:'13136150063',
-      client:"client Green",
-      duree:'6 mois',
-      type:"Vie",
-      commition:500,
-      etat:2,
-      created_at:"02/09/2021",
-      updated_at: "02/09/2021"
-    },
-    {
-      partenaire:"Red Company",
-      telephone:'13136150063',
-      client:"client Red",
-      duree:'9 mois',
-      type:"Vie",
-      commition:200,
-      etat:3,
-      created_at:"02/09/2021",
-      updated_at: "02/09/2021"
+
+      etat: 0,
+      id: 15,
+      prix: 797,
+      produit: "MAXIDROL POM OPH 3G5",
+      quantite: 4,
+      adresse_seller: "mmjjn",
+      nom_seller: "cloudpharma",
+      solde_seller: 51329,
+      tel_seller: "779013878",
+      type_seller: "pharm",
+      adresse_buyer: "mbour",
+      id_buyer: 2,
+      nom_buyer: "cp2",
+      solde_buyer: 48406,
+      tel_buyer: "778987766",
+      type_buyer: "pharm"
+
     },
   ];
 
   public columns: Array<object> = [
     {
-      title: "Partenaire",
+      title: "Produit",
     },
     {
-      title:"Téléphone",
+      title:"Quantite",
     },
     {
-      title:"type",
+      title:"Prix",
     },
     {
-      title:"Durée",
+      title:"Pharmacie Seller",
     },
     {
-      title:"Commition",
+      title:"Pharmacie Buyer",
     },
     {
-      title:"État",
+      title:"Tel Seller",
     },
     {
-      title:"Création",
+      title:"Tel Buyer",
     },
     {
-      title:"Mise à jour",
-    }
-    ,
-    {
-      title:"Action",
+      title:"Etat",
     }
   ];
 
+  parseDatas(produits){
+    let arr = [];
+    produits.forEach(element => {
+      arr.push({
+        etat: element.etat,
+        id: element.id,
+        prix: element.prix,
+        produit: element.produit,
+        quantite: element.quantite,
+        adresse_seller: element.sellerPharm.adresse,
+        nom_seller: element.sellerPharm.nom,
+        solde_seller: element.sellerPharm.solde,
+        tel_seller: element.sellerPharm.tel,
+        type_seller: element.sellerPharm.type,
+        adresse_buyer:  element.buyerPharm.adresse,
+        id_buyer: element.buyerPharm.id,
+        nom_buyer: element.buyerPharm.nom,
+        solde_buyer: element.buyerPharm.solde,
+        tel_buyer: element.buyerPharm.tel,
+        type_buyer: element.buyerPharm.type
+      });
+    });
 
+    return arr;
+  }
 
-  constructor(private fb: FormBuilder,private modalService: NzModalService) {
+  constructor(private fb: FormBuilder,private modalService: NzModalService,private _tranService:TransactionsService) {
   }
 
   showModal(curentPartenaire): void {
@@ -104,6 +112,14 @@ export class SuiviTransactionsComponent implements OnInit {
       name: '',
       state: ''
     });
+
+    this._tranService.getBuyedProducts({}).then(rep=>{
+      console.log(rep.produit);
+      this.dataSet =  this.parseDatas(rep.produit);
+    }).catch(err=>{
+      console.log(err);
+    })
+
   }
 
   public resetForm(): void {

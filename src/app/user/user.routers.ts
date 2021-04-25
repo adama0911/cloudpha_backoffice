@@ -18,12 +18,8 @@ export const userRouters = [
     children: [
       {
         path: '',
-        redirectTo: 'suivisoldes',
+        redirectTo: 'suivitransactions',
         pathMatch: 'full'
-      },
-      {
-        path: 'suivisoldes',
-        component: SuiviSoldesComponent
       },
       {
         path: 'suivitransactions',

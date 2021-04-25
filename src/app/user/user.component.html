@@ -1,12 +1,11 @@
 <nz-layout style="background-color: transparent !important;">
   <nz-layout style="background-color: transparent !important;">
-    <nz-sider [nzWidth]="200" style="background: #fdc712; min-height: 90vh;" nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
-      <ul nz-menu [nzMode]="'inline'" style="height:100%" [nzSelectable]="false" style="background: #fdc712 !important;">
-        <li nz-submenu [(nzOpen)]="openMap.sub1" (nzOpenChange)="openHandle('sub1')" style="background: #fdc712;">
+    <nz-sider [nzWidth]="200" style="background: #fff; min-height: 90vh;" nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+      <ul nz-menu [nzMode]="'inline'" style="height:100%" [nzSelectable]="false" style="background: #fff !important;">
+        <li nz-submenu [(nzOpen)]="openMap.sub1" (nzOpenChange)="openHandle('sub1')" style="background: #fff;">
           <span title><i nz-icon type="user"></i>Partenaires</span>
-          <ul style="background: #fdc712;">
+          <ul style="background: #fff;">
             <li class="hvr-radial-out" nz-menu-item routerLink="dashbord" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">Dashbord</li>
-            <li class="hvr-radial-out"  nz-menu-item routerLink="suivisoldes" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">Suivi Soldes</li>
             <li class="hvr-radial-out"   nz-menu-item routerLink="suivitransactions" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact: true}">Suivi Transactions</li>
           </ul>
         </li>
