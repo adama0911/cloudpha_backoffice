@@ -20,9 +20,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of dataSet  | paginate: { itemsPerPage: 10, currentPage: p };" style="color: white;text-align: center;" class="hvr-pop">
-            <td>{{data.partenaire}}</td>
-            <td>{{data.telephone}}</td>
-            <td>{{data.address}}</td>
+            <td>{{data.nom}}</td>
+            <td>{{data.tel}}</td>
+            <td>{{data.adresse}}</td>
             <td [ngClass]="{bg:true,'bg-danger':data.solde<=10000,'bg-warning':(data.solde>10000 && data.solde<=50000),'bg-success':(data.solde>50000)}">{{data.solde}}</td>
             <td>{{data.created_at}}</td>
             <td>{{data.updated_at}}</td>
@@ -41,9 +41,9 @@
   
 </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="positionner : {{curentPartenaire.entreprise}}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzOkText="Ok" nzCancelText="Cancel" >
+<nz-modal [(nzVisible)]="isVisible" nzTitle="positionner : {{curentPartenaire.nom}}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzOkText="Ok" nzCancelText="Cancel" >
         <nz-input-group [nzPrefix]="prefixUser">
-          <input type="text" nz-input formControlName="password" placeholder="Montant">
+          <input type="text" nz-input formControlName="montantPosition" placeholder="Montant">
         </nz-input-group>
 </nz-modal>
   <ng-template #prefixUser><i nz-icon type="money"></i></ng-template>

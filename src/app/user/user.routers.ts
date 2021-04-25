@@ -26,6 +26,11 @@ export const userRouters = [
         component: SuiviTransactionsComponent
       },
       {
+        path: 'suiviParmacies',
+        component: SuiviSoldesComponent
+      },
+      
+      {
         path: 'dashbord',
         component: DashbordComponent
       }

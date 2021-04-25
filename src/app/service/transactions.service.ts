@@ -24,4 +24,11 @@ export class TransactionsService {
     let link=this.url+ '/api/produit/getBuyedProducts';
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
   }
+ 
+  public getPharmacies(param): Promise<any>{
+    let params="param="+JSON.stringify(param);
+    console.log(params);
+    let link=this.url+ '/api/produit/listPharm';
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
+  }
 }
