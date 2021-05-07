@@ -11,9 +11,11 @@ import { TransactionsService } from 'src/app/service/transactions.service';
 })
 export class SuiviSoldesComponent implements OnInit {
   validateForm: FormGroup;
+  PositionnementForm: FormGroup;
   isVisible = false;
   p: number = 1;
   montantPosition=0;
+  public erreur = 0
   
   curentPartenaire={
     nom:"Black Company",
@@ -64,6 +66,7 @@ export class SuiviSoldesComponent implements OnInit {
   showModal(curentPartenaire): void {
     this.curentPartenaire=curentPartenaire;
     this.isVisible = true;
+    this.erreur = 0
   }
 
   handleOk(): void {
@@ -71,10 +74,17 @@ export class SuiviSoldesComponent implements OnInit {
     let b = 34;
     let  x =89;
     let z = (a*x*x*x)+b
+    
     // this.isVisible = false;
     console.log(this.curentPartenaire)
-    this._tranService.posistionnerPharmacie({idShop:this.curentPartenaire.id,montant:this.montantPosition,a:a,b:b,z:z}).then(rep=>{
+    this._tranService.posistionnerPharmacie({idShop:this.curentPartenaire.id,montant:this.PositionnementForm.value.montantPosition,a:a,b:b,z:z}).then(rep=>{
       console.log(rep)
+      if(rep.status==1){
+        this.getPharmacies();
+        this.isVisible = false;
+      }else{
+        this.erreur = 1
+      }
     }).catch(err=>{
       console.log(err)
     })
@@ -90,6 +100,16 @@ export class SuiviSoldesComponent implements OnInit {
       state: ''
     });
 
+    this.PositionnementForm = this.fb.group({
+      montantPosition: 0,
+    });
+
+
+    this.getPharmacies();
+   
+  }
+
+  getPharmacies(){
     this._tranService.getPharmacies({}).then(rep=>{
       console.log(rep.pharm);
       if(rep.pharm && rep.pharm.length!=0){

@@ -42,9 +42,17 @@
 </div>
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="positionner : {{curentPartenaire.nom}}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzOkText="Ok" nzCancelText="Cancel" >
-        <nz-input-group [nzPrefix]="prefixUser">
-          <input type="text" nz-input formControlName="montantPosition" placeholder="Montant">
-        </nz-input-group>
+
+          <form nz-form [formGroup]="PositionnementForm" class="login-form"  style="min-width: 31%;">
+            <nz-form-item>
+               <nz-form-control>
+                <nz-input-group [nzPrefix]="prefixUser">
+                  <input type="text" nz-input formControlName="montantPosition" placeholder="Montant" >
+                </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+        <p style="color:red" *ngIf="this.erreur==1">Erreur lors du positionnnement !, veuillez réessayer </p>
 </nz-modal>
   <ng-template #prefixUser><i nz-icon type="money"></i></ng-template>
 
